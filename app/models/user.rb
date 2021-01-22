@@ -11,6 +11,9 @@
 #  updated_at   :datetime         not null
 #
 class User < ApplicationRecord
+    has_many :posts
+    has_many :comments
+
     validates :display_name, presence: true, length: {maximum: 50}, uniqueness: true
     validates :password, presence: true, length: {maximum: 50, minimum: 8}
     validates :user_name, presence: true, length: {maximum: 50}, uniqueness: true
