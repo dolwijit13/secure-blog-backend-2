@@ -18,7 +18,7 @@ class UserController < ApplicationController
         user = User.new(display_name: params[:displayName], user_name: params[:userName], password: params[:password])
         user.is_admin = false
         if user.save
-            render json: {displayName: user.display_name}, status: :created
+            render json: {displayName: user.display_name, userId: user.id}, status: :created
         else
             render status: :bad_request
         end

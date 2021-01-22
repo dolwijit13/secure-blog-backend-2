@@ -5,6 +5,13 @@ class PostsController < ApplicationController
   end
 
   def add
+    post = Post.new(content: params[:content], user_id: params[:userId])
+    post.display_name = post.user.display_name
+    if post.save
+      render status: :created
+    else
+      render status: :unauthorized
+    end
   end
 
   def edit

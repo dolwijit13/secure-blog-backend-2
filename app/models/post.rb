@@ -23,6 +23,8 @@ class Post < ApplicationRecord
     belongs_to :user
 
     validates :content, presence: true, length: {maximum: 500}
+    validates :user_id, presence: true
+    validates :display_name, presence: true
 
     def to_api_format
         json = {}

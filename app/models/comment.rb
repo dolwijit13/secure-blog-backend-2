@@ -21,9 +21,12 @@
 #  user_id  (user_id => users.id)
 #
 class Comment < ApplicationRecord
-    validates :content, presence: true, length: {maximum: 500}
     belongs_to :user
     belongs_to :post
+
+    validates :content, presence: true, length: {maximum: 500}
+    validates :user_id, presence: true
+    validates :post_id, presence: true
 
     def to_api_format
         json = {}
@@ -31,7 +34,7 @@ class Comment < ApplicationRecord
         json[:displayName] = self.display_name
         json[:createdTime] = self.created_at
         json[:content] = self.content
-        json[:postId] = 1
+        json[:postId] = self.post_id
         json
     end
 end
