@@ -26,4 +26,17 @@ class PostsController < ApplicationController
       render status: :bad_request
     end
   end
+
+  def delete
+    post = Post.find_by(id: params[:id])
+    if not post.present?
+      render status: :bad_request
+    end
+    post.comments.map{ |comment| comment.delete}
+    if post.delete
+      render status: :ok
+    else
+      render status: :bad_request
+    end
+  end
 end

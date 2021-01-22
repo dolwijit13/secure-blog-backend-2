@@ -26,4 +26,16 @@ class CommentsController < ApplicationController
       render status: :bad_request
     end
   end
+
+  def delete
+    comment = Comment.find_by(id: params[:id])
+    if not comment.present?
+      render status: :bad_request
+    end
+    if comment.delete
+      render status: :ok
+    else
+      render status: :bad_request
+    end
+  end
 end

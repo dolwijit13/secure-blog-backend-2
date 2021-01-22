@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   get 'posts', to: 'posts#show'
   post 'posts', to: 'posts#add'
   post 'posts/:id', to: 'posts#edit'
+  delete 'posts/:id', to: 'posts#delete'
 
   get 'comments', to: 'comments#show'
   post 'comments', to: 'comments#add'
   post 'comments/:id', to: 'comments#edit'
+  delete 'comments/:id', to: 'comments#delete'
 end
