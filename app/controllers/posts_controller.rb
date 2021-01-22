@@ -15,5 +15,15 @@ class PostsController < ApplicationController
   end
 
   def edit
+    post = Post.find_by(id: params[:id])
+    if not post.present?
+      render status: :bad_request
+    end
+    post.content = params[:content]
+    if post.save
+      render status: :ok
+    else
+      render status: :bad_request
+    end
   end
 end

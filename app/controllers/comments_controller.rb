@@ -15,5 +15,15 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    comment = Comment.find_by(id: params[:id])
+    if not comment.present?
+      render status: :bad_request
+    end
+    comment.content = params[:content]
+    if comment.save
+      render status: :ok
+    else
+      render status: :bad_request
+    end
   end
 end
