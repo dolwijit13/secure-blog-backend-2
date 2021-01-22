@@ -15,4 +15,8 @@ class User < ApplicationRecord
     validates :password, presence: true, length: {maximum: 50, minimum: 8}
     validates :user_name, presence: true, length: {maximum: 50}, uniqueness: true
     validates :is_admin, absence: true
+
+    def self.login(user_name, password)
+        User.find_by(user_name: user_name, password: password)
+    end
 end
