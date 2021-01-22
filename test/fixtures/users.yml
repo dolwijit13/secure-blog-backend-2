@@ -4,6 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  display_name :text
+#  is_admin     :boolean
 #  password     :text
 #  user_name    :text
 #  created_at   :datetime         not null
