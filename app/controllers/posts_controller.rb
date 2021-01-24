@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
   before_action :authorize_request
-  before_action :set_post, only: [:edit, :delete]
+  before_action :set_post, only: [:update, :destroy]
 
-  def show
+  def index
     posts = Post.all
-    render json: posts.map{ |post| post.to_api_format}, status: :ok
+    render json: posts.reverse.map{ |post| post.to_api_format}, status: :ok
   end
 
-  def add
+  def create
     @post = Post.new(post_params)
     @post.user = @user
     @post.display_name = @post.user.display_name
@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
+  def update
     if not @post.present?
       render status: :bad_request
     end
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     if not @post.present?
       render status: :bad_request
     end

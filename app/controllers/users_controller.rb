@@ -1,12 +1,12 @@
-class UserController < ApplicationController
-    before_action :authorize_request, except: :createUser
+class UsersController < ApplicationController
+    before_action :authorize_request, except: :create
 
-    def getUsers
+    def index
         users = User.all
         render json: users.as_json
     end
 
-    def getUserById
+    def show
         user = User.find(params[:id]) rescue nil
         if user.present?
             render json: user.as_json
@@ -15,7 +15,7 @@ class UserController < ApplicationController
         end
     end
 
-    def createUser
+    def create
         @user = User.new(display_name: params[:displayName], user_name: params[:userName], password: params[:password])
         @user.is_admin = false
         if @user.save

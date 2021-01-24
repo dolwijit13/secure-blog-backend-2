@@ -1,13 +1,13 @@
 class CommentsController < ApplicationController
   before_action :authorize_request
-  before_action :set_comment, only: [:edit, :delete]
+  before_action :set_comment, only: [:update, :destroy]
 
-  def show
+  def index
     comments = Comment.all
     render json: comments.map{ |comment| comment.to_api_format}, status: :ok
   end
 
-  def add
+  def create
     @comment = Comment.new(comment_params)
     @comment.user = @user
     @comment.post_id = params[:postId]
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
+  def update
     if not @comment.present?
       render status: :bad_request
     end
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     if not @comment.present?
       render status: :bad_request
     end
