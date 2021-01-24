@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'posts', to: 'posts#add'
   post 'posts/:id', to: 'posts#edit'
   delete 'posts/:id', to: 'posts#delete'
+  get 'posts/test', to: 'posts#test'
 
   get 'comments', to: 'comments#show'
   post 'comments', to: 'comments#add'
