@@ -63,6 +63,7 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    bcrypt (3.1.16)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -74,6 +75,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.7)
       concurrent-ruby (~> 1.0)
+    jwt (2.2.2)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -147,8 +149,10 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bcrypt
   bootsnap (>= 1.4.4)
   byebug
+  jwt
   puma (~> 5.0)
   rack-cors
   rails (~> 6.1.0)

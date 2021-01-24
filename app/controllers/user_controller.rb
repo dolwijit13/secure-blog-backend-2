@@ -1,4 +1,6 @@
 class UserController < ApplicationController
+    before_action :authorize_request, except: :createUser
+
     def getUsers
         users = User.all
         render json: users.as_json
@@ -14,11 +16,11 @@ class UserController < ApplicationController
     end
 
     def createUser
-        puts params
-        user = User.new(display_name: params[:displayName], user_name: params[:userName], password: params[:password])
-        user.is_admin = false
-        if user.save
-            render json: {displayName: user.display_name, userId: user.id}, status: :created
+        @user = User.new(display_name: params[:displayName], user_name: params[:userName], password: params[:password])
+        @user.is_admin = false
+        if @user.save
+            token = JsonWebToken.encode({user_id: @user.id})
+            render json: {displayName: @user.display_name, userId: @user.id, token: token}, status: :created
         else
             render status: :bad_request
         end
